@@ -2,6 +2,7 @@ package furniture.form;
 
 import furniture.controller.UserController;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 import model.User;
 
@@ -12,7 +13,15 @@ public class AdminForm extends javax.swing.JFrame {
    
     public AdminForm() {
         initComponents();
+        initCombobox();
+        initRadioButton();
         setTableData(userController.getData());
+    }
+    
+    private void initRadioButton(){
+        ButtonGroup group = new ButtonGroup();
+        group.add(radio_man);
+        group.add(radio_woman);
     }
 
  
@@ -20,7 +29,6 @@ public class AdminForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         base = new javax.swing.JPanel();
         item_panel = new javax.swing.JPanel();
         user_panel = new javax.swing.JPanel();
@@ -35,7 +43,6 @@ public class AdminForm extends javax.swing.JFrame {
         txt_password = new javax.swing.JPasswordField();
         radio_man = new javax.swing.JRadioButton();
         radio_woman = new javax.swing.JRadioButton();
-        combo_job_user = new java.awt.Choice();
         jScrollPane1 = new javax.swing.JScrollPane();
         user_table = new javax.swing.JTable();
         txt_search_user = new javax.swing.JTextField();
@@ -46,6 +53,7 @@ public class AdminForm extends javax.swing.JFrame {
         btn_clear_user = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        combo_job_user = new javax.swing.JComboBox<>();
         title = new javax.swing.JLabel();
         btn_item = new javax.swing.JButton();
         btn_user = new javax.swing.JButton();
@@ -117,9 +125,11 @@ public class AdminForm extends javax.swing.JFrame {
         radio_woman.setText("Woman");
         radio_woman.setBorder(null);
 
-        combo_job_user.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        combo_job_user.setForeground(new java.awt.Color(237, 28, 36));
-
+        user_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                user_tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(user_table);
         if (user_table.getColumnModel().getColumnCount() > 0) {
             user_table.getColumnModel().getColumn(0).setResizable(false);
@@ -144,10 +154,20 @@ public class AdminForm extends javax.swing.JFrame {
         });
 
         btn_edit_user.setText("Edit");
+        btn_edit_user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_edit_userMouseClicked(evt);
+            }
+        });
 
         btn_delete_user.setText("Delete");
 
         btn_add_user.setText("Add");
+        btn_add_user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_add_userMouseClicked(evt);
+            }
+        });
 
         btn_clear_user.setText("Clear");
 
@@ -162,7 +182,7 @@ public class AdminForm extends javax.swing.JFrame {
         user_panelLayout.setHorizontalGroup(
             user_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, user_panelLayout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(user_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(user_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(user_panelLayout.createSequentialGroup()
@@ -170,14 +190,13 @@ public class AdminForm extends javax.swing.JFrame {
                             .addGap(32, 32, 32)
                             .addComponent(radio_woman))
                         .addComponent(jLabel3)
-                        .addComponent(txt_username)
+                        .addComponent(txt_username, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addComponent(jLabel5)
                         .addComponent(txt_name_user)
                         .addComponent(jLabel6)
                         .addComponent(jLabel7)
-                        .addComponent(txt_password)
-                        .addComponent(combo_job_user, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_password))
                     .addGroup(user_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(user_panelLayout.createSequentialGroup()
                             .addComponent(btn_delete_user, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,7 +205,8 @@ public class AdminForm extends javax.swing.JFrame {
                         .addGroup(user_panelLayout.createSequentialGroup()
                             .addComponent(btn_add_user, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(btn_edit_user, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_edit_user, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(combo_job_user, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(user_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(user_panelLayout.createSequentialGroup()
                         .addGap(103, 103, 103)
@@ -203,7 +223,7 @@ public class AdminForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_search_user))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, user_panelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -233,7 +253,7 @@ public class AdminForm extends javax.swing.JFrame {
                             .addComponent(radio_woman))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(16, 16, 16)
                         .addComponent(combo_job_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addGroup(user_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -361,7 +381,69 @@ public class AdminForm extends javax.swing.JFrame {
         String search = txt_search_user.getText();
         setTableData(userController.getDataByName(search));
     }//GEN-LAST:event_btn_search_userMouseClicked
+    
+    private void getSelectedData(){
+        int i = user_table.getSelectedRow();
+        String id = user_table.getValueAt(i, 0).toString();
+        String name = user_table.getValueAt(i, 1).toString();
+        String gender = user_table.getValueAt(i, 4).toString();
+        String job = user_table.getValueAt(i, 5).toString();
+        String username = user_table.getValueAt(i, 2).toString();
+        String password = user_table.getValueAt(i, 3).toString();
+        
+        txt_username.setText(username);
+        txt_password.setText(password);
+        txt_name_user.setText(name);
+        
+        if(gender.equals("Man")){
+            radio_man.setSelected(true);
+        }else{
+            radio_woman.setSelected(true);
+        }
+        
+        if(job.equals("Admin")){
+            combo_job_user.setSelectedIndex(0);
+        }else{
+            combo_job_user.setSelectedIndex(1);
+        }
+    }
+    
+    private User getInputData(){
+        String name = txt_name_user.getText();
+        String username = txt_username.getText();
+        String password = txt_password.getText();
+        String gender;
+        if(radio_man.isSelected()){
+            gender = "Man";
+        }else{
+            gender = "Woman";
+        }
+        String job = combo_job_user.getSelectedItem().toString();
+        User u = new User(name,gender,job,username,password);
+        return u;
+    }
+    
+    private void btn_add_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_add_userMouseClicked
+       userController.insert(getInputData());
+       setTableData(userController.getData());
+    }//GEN-LAST:event_btn_add_userMouseClicked
 
+    private void btn_edit_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_edit_userMouseClicked
+        int i = user_table.getSelectedRow();
+        String id = user_table.getValueAt(i, 0).toString();
+        userController.update(getInputData(), id);
+        setTableData(userController.getData());
+    }//GEN-LAST:event_btn_edit_userMouseClicked
+
+    private void user_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_user_tableMouseClicked
+      getSelectedData();
+    }//GEN-LAST:event_user_tableMouseClicked
+
+    private void initCombobox(){
+        combo_job_user.addItem("Admin");
+        combo_job_user.addItem("Cashier");
+    }
+    
     private void setTableData(List<User> data){
          DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.setColumnIdentifiers(
@@ -374,7 +456,6 @@ public class AdminForm extends javax.swing.JFrame {
                     "Job"
                 }
             );
-
             for (User u : data) {
                 Object[] o = new Object[6];
                 o[0] = Integer.toString(u.getId());
@@ -410,8 +491,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_item;
     private javax.swing.JButton btn_search_user;
     private javax.swing.JButton btn_user;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private java.awt.Choice combo_job_user;
+    private javax.swing.JComboBox<String> combo_job_user;
     private javax.swing.JPanel item_panel;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;

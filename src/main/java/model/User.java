@@ -17,6 +17,14 @@ public class User {
         this.username = username;
         this.password = password;
     }
+    
+      public User( String name, String gender, String job, String username, String password) {
+        this.name = name;
+        this.gender = gender;
+        this.job = job;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
