@@ -82,7 +82,7 @@ public class UserController {
         }
         return list;
     }
-    
+  
    public List<User> getDataByName(String name){
         List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM user WHERE name LIKE '%"+name+"%'";

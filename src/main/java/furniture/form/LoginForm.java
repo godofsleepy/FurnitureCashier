@@ -91,8 +91,14 @@ public class LoginForm extends javax.swing.JFrame {
                 if(txt_username.getText().equals(result.getString("username")) && txt_password.getText().equals(result.getString("password"))){
                     JOptionPane.showMessageDialog(null, "berhasil login");
                     this.setVisible(false);
-                    AdminForm admin = new AdminForm();
-                    admin.setVisible(true);
+                    if(result.getString(4).equals("Admin")){
+                      AdminForm admin = new AdminForm();
+                    admin.setVisible(true);   
+                    }else{
+                      CashierForm cashier = new CashierForm();
+                      cashier.setVisible(true);
+                    }
+                   
                 }
             }else{
                     JOptionPane.showMessageDialog(null, "username atau password salah");
