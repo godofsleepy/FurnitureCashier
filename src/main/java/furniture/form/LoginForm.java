@@ -95,7 +95,7 @@ public class LoginForm extends javax.swing.JFrame {
                       AdminForm admin = new AdminForm();
                     admin.setVisible(true);   
                     }else{
-                      CashierForm cashier = new CashierForm();
+                      CashierForm cashier = new CashierForm(result.getString(1));
                       cashier.setVisible(true);
                     }
                    
