@@ -12,4 +12,5 @@ repositories {
 dependencies {
     testImplementation     'junit:junit:4.13'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+    compile group: 'net.imagej', name: 'ij', version: '1.52t'
 }

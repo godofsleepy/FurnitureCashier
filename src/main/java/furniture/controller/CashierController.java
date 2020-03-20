@@ -17,19 +17,23 @@ import model.Transaction;
  */
 public class CashierController {
     public boolean transactionn(Transaction transaction){
-        String sql = "INSERT INTO `transaction` (`id_transaction`, `address`, `number_phone`, `customer`, `total`, `id_user`, `shipment`, `discount`) VALUES (NULL, NULL, NULL, NULL, "+ transaction.getTotal() +", "+ transaction.getId_user() +", '0', NULL); SELECT LAST_INSERT_ID();";
+        String sql = "INSERT INTO `transaction` (`id_transaction`, `address`, `number_phone`, `customer`, `total`, `id_user`, `shipment`, `discount`,`datetime`) VALUES (NULL, NULL, NULL, NULL, "+ transaction.getTotal() +", "+ transaction.getId_user() +", '0', NULL, current_timestamp())";
+        String query_id = "SELECT LAST_INSERT_ID()";
         try {
-            PreparedStatement statement = MysqlCon.getConnection().prepareStatement(sql);
-                ResultSet rs = statement.executeQuery();
+            Statement state = MysqlCon.state;
+            
+            state.executeUpdate(sql);
+            ResultSet rs = state.executeQuery(query_id);
             if(rs.next()){
-                int id = rs.getInt(0);
+                int id = rs.getInt(1);
                 for(int i =0; i < transaction.getId().size(); i++){
-                    String query = "INSERT INTO `transaction_item` (`id_transaction`, `id_item`) VALUES ("+id+"', "+transaction.getId().get(i)+");";
-                    statement.executeUpdate(query);
+                    System.out.println("" + id + " " + transaction.getId().get(0));
+                    String query = "INSERT INTO `transaction_item` (`id_transaction`, `id_item`) VALUES ('"+id+"', '"+transaction.getId().get(i)+"');";
+                    state.executeUpdate(query);
                 }
+                 return true;
             }
-            statement.close();
-            return true;
+            state.close();      
         } catch (Exception ex) {
             System.out.println("Error Insert");
             System.out.println(ex.getMessage());
