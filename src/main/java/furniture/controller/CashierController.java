@@ -17,7 +17,7 @@ import model.Transaction;
  */
 public class CashierController {
     public boolean transactionn(Transaction transaction){
-        String sql = "INSERT INTO `transaction` (`id_transaction`, `address`, `number_phone`, `customer`, `total`, `id_user`, `shipment`, `discount`,`datetime`) VALUES (NULL, NULL, NULL, NULL, "+ transaction.getTotal() +", "+ transaction.getId_user() +", '0', NULL, current_timestamp())";
+        String sql = "INSERT INTO `transaction` (`id_transaction`, `total`, `id_user`, `shipment`, `discount`, `datetime`) VALUES ( NULL, "+ transaction.getTotal() +", "+ transaction.getId_user() +", '0', NULL, current_timestamp())";
         String query_id = "SELECT LAST_INSERT_ID()";
         try {
             Statement state = MysqlCon.state;
